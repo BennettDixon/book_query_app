@@ -1,0 +1,18 @@
+sudo: required
+services:
+  - docker
+before_install:
+  - docker build -t "$DOCKER_ID/book_query_app-frontend-test" -f ./nginx_router/frontend/Dockerfile.dev ./nginx_router/frontend
+  - docker build -t "$DOCKER_ID/book_query_app-backend-test" -f ./nginx_router/backend/Dockerfile.dev ./nginx_router/backend
+script:
+  # -- --coverage is needed to exit upon npm test completion
+  - docker run -e CI=true "$DOCKER_ID/book_query_app-frontend-test" npm test -- --coverage
+  - docker run -e CI=true "$DOCKER_ID/book_query_app-backend-test" python3 -m unittest discover tests
+after_success:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker build -t "$DOCKER_ID/book_query_app-nginx_router" ./nginx_router
+  - docker build -t "$DOCKER_ID/book_query_app-frontend" ./nginx_router/frontend
+  - docker build -t "$DOCKER_ID/book_query_app-backend" ./nginx_router/backend
+  - docker push "$DOCKER_ID/book_query_app-nginx_router"
+  - docker push "$DOCKER_ID/book_query_app-frontend"
+  - docker push "$DOCKER_ID/book_query_app-backend"

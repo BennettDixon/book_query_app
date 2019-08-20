@@ -1,0 +1,36 @@
+version: "3"
+services:
+  nginx-router:
+    restart: always
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./nginx_router
+    ports:
+      - "8800:80"
+    depends_on:
+      - frontend
+      - backend
+
+  postgres:
+    image: "postgres:latest"
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+  frontend:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./nginx_router/frontend
+    volumes:
+      - /app/node_modules
+      - ./nginx_router/frontend:/app
+  backend:
+    build:
+      context: ./nginx_router/backend
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./nginx_router/backend:/app
+    depends_on:
+      - postgres
+    environment:
+      - PGDATABASE=postgres
+      - PGPASSWORD=postgres_password
+      - PGPORT=5432
