@@ -131,3 +131,84 @@ class UpdateAuthor(graphene.Mutation):
             author_instance.save()
         # return with status and updated instance (False/None if failed)
         return UpdateAuthor(ok=ok, author=author_instance)
+
+
+class CreateBook(graphene.Mutation):
+    """
+        Mutation to create an instance of the book in the database using graphql
+    """
+    class Arguments:
+        """
+            define the input arguments for the static mutate method
+        """
+        input = BookInput(required=True)
+
+    ok = graphene.Boolean()
+    book = graphene.Field(BookType)
+
+    @staticmethod
+    def mutate(root, info, input=None):
+        """
+            Mutation method to create the new book &
+                verify the author is a valid author
+        """
+        ok = True
+        author = None
+        author = Author.objects.get(pk=input.author.id)
+        if author is None:
+            return CreateBook(ok=False, book=None)
+        book_instance = Book(title=input.title,
+                             year=input.year,
+                             author=author)
+        book_instance.save()
+        return CreateBook(ok=ok, book=book_instance)
+
+
+class UpdateBook(graphene.Mutation):
+    """
+        Mutation to update a book with new information
+    """
+    class Arguments:
+        """
+            Arguments for mutation method input
+        """
+        id = graphene.Int(required=True)
+        input = BookInput(required=True)
+
+    ok = graphene.Boolean()
+    book = graphene.Field(BookType)
+
+    @staticmethod
+    def mutate(root, info, id, input=None):
+        """
+            Mutate method to update a book,
+            validates author included in update
+        """
+        ok = False
+        book_instance = Book.objects.get(pk=id)
+        if book_instance:
+            ok = True
+            author = Author.get(pk=input.author.id)
+            # author included in update not in authors
+            if author is None:
+                return UpdateBook(ok=False, book=None)
+            book_instance.author = author
+            book_instance.title = input.title
+            book_instance.year = input.year
+            book_instance.save()
+            return UpdateBook(ok=ok, book=book_instance)
+        return UpdateBook(ok=ok, book=None)
+
+
+class Mutation(graphene.ObjectType):
+    """
+        Our set of mutations allowed
+    """
+    create_author = CreateAuthor.Field()
+    update_author = UpdateAuthor.Field()
+    create_book = CreateBook.Field()
+    update_book = UpdateBook.Field()
+
+
+# map the queries and the mutations to a schema
+schema = graphene.Schema(query=Query, mutation=Mutation)
