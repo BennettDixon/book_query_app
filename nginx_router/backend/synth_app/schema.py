@@ -67,3 +67,67 @@ class Query(ObjectType):
             fetches all of the books
         """
         return Book.objects.all()
+
+
+class AuthorInput(graphene.InputObjectType):
+    """
+        The input for the author class
+        aka when an author needs to be added to the db
+    """
+    id = graphene.ID()
+    name = graphene.String()
+
+
+class BookInput(graphene.InputObjectType):
+    """
+        The input for the book class
+        aka when a book needs to be added to the db
+    """
+    id = graphene.ID()
+    title = graphene.String()
+    author = graphene.Field(AuthorInput)
+    year = graphene.Int()
+
+
+class CreateAuthor(graphene.Mutation):
+    """
+        Mutation to actually manipulate the db and graphql
+        (do the actual creation)
+    """
+    class Arguments:
+        # define the input for our static mutate method
+        input = AuthorInput(required=True)
+
+    ok = graphene.Boolean()
+    author = graphene.Field(AuthorType)
+
+    @staticmethod
+    def mutate(root, info, input=None):
+        ok = True
+        author_instance = Author(name=input.name)
+        author_instance.save()
+        return CreateAuthor(ok=ok, author=author_instance)
+
+
+class UpdateAuthor(graphene.Mutation):
+    """
+        Mutation to update an instance of an author in the database using graphql
+    """
+    class Arguments:
+        # define the input arguments for our static mutate method
+        id = graphene.Int(required=True)
+        input = AuthorInput(required=True)
+
+    ok = graphene.Boolean()
+    author = graphene.Field(AuthorType)
+
+    @staticmethod
+    def mutate(root, info, id, input=None):
+        ok = False
+        author_instance = Author.objects.get(pk=id)
+        if author_instance:
+            ok = True
+            author_instance.name = input.name
+            author_instance.save()
+        # return with status and updated instance (False/None if failed)
+        return UpdateAuthor(ok=ok, author=author_instance)
