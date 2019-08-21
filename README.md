@@ -51,8 +51,7 @@ docker exec -it <container-id> psql -U postgres -f /app/postgres_setup.sql
 Restart the network of containers using the following to apply the migration to the new database:
 
 ```
-docker-compose down
-docker-compose up
+docker-compose restart
 ```
 
 Visit the GraphQL endpoint `localhost:8800/graphql` and play with GraphQL Queries!
