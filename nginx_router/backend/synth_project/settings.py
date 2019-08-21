@@ -26,7 +26,6 @@ SECRET_KEY = '=k!m7m1hj6jgw!xsihuv4s(9yy0c4%h#f+te!@0-08$x80@i8^'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '*',
     '0.0.0.0',
     # backend is the service definition for this in docker-compose
     'backend',
