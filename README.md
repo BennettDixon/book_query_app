@@ -41,7 +41,7 @@ Locate the postgres container id using
 docker ps
 ```
 
-Execute the following, substituting your postgres container id. This will setup a user and database in your postgres container.
+Execute the following, substituting your postgres container id. This will setup a user and database in your postgres container. You only need to do this once unless you delete the docker-compose volume mount or the postgres data on your local machine.
 
 ```
 docker exec -it <container-id> psql -U postgres -f /app/postgres_setup.sql
