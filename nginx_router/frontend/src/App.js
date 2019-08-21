@@ -7,6 +7,14 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
+        <a
+          className="App-link"
+          href="/graphql"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Check out the GraphQL Endpoint!
+        </a>
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
