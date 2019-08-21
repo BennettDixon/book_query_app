@@ -1,10 +1,11 @@
 # base python image
-FROM python:3.5.7-alpine3.8
+FROM python:3.5.7
 
 # set working directory
 WORKDIR '/app'
 
-RUN pip3 install Django gunicorn
+RUN pip3 install --upgrade pip && \
+    pip3 install Django gunicorn graphene_django psycopg2-binary
 
 
 # move backend directory into root of app directory

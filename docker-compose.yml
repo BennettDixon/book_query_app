@@ -31,6 +31,8 @@ services:
     depends_on:
       - postgres
     environment:
-      - PGDATABASE=postgres
+      - PGDATABASE=book_storage
       - PGPASSWORD=postgres_password
       - PGPORT=5432
+      - PGHOST=postgres
+      - PGUSER=postgres_user
