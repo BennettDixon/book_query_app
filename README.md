@@ -22,6 +22,23 @@ This project was created using a tool I built: [`synth`](https://github.com/benn
 $ sudo apt-get install git
 ```
 
+## :wrench: Setup
+
+Clone the project
+`git clone https://github.com/BennettDixon/book_query_app`
+
+Run the container network, this will build them the first time so be patient while images are downloaded and containers are built
+`docker-compose up`
+
+Visit the GraphQL endpoint `localhost:8800/graphql` and play with GraphQL Queries!
+
+It's really that easy!
+
+Feel free to add objects to the `/nginx_router/backend/books.json` file for further testing! They will be loaded in each time you boot the containers.
+
+Shutting it down
+`docker-compose down` to shut the web app off!
+
 ## :blue_book: Authors
 
 - **Bennett Dixon** - [@BennettDixon](https://github.com/BennettDixon)
