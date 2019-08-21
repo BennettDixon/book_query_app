@@ -14,8 +14,6 @@ This project was created using a tool I built: [`synth`](https://github.com/benn
 
 - Must have `git` installed
 
-- Must have repository cloned
-
 - Must have `docker` installed
 
 ```
@@ -27,7 +25,8 @@ $ sudo apt-get install git
 Clone the project
 
 ```
-git clone https://github.com/BennettDixon/book_query_app
+git clone https://github.com/BennettDixon/book_query_app;
+cd book_query_app;
 ```
 
 Run the container network, this will build them the first time so be patient while images are downloaded and containers are built
