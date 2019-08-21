@@ -22,7 +22,7 @@ class Book(models.Model):
     """
     title = models.CharField(max_length=100)
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
-    publication_year = models.IntegerField
+    year = models.IntegerField(default=0000)
 
     def __str__(self):
         return self.title
