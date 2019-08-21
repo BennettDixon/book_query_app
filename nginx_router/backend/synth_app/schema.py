@@ -1,6 +1,6 @@
 import graphene
 from graphene_django.types import DjangoObjectType, ObjectType
-from backend.synth_app.models import Author, Book
+from synth_app.models import Author, Book
 
 
 class AuthorType(DjangoObjectType):
@@ -49,7 +49,7 @@ class Query(ObjectType):
 
             Return: Book if found, otherwise None 
         """
-        id kwargs.get('id')
+        id = kwargs.get('id')
 
         if id:
             return Book.objects.get(pk=id)

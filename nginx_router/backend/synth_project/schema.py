@@ -1,5 +1,5 @@
 import graphene
-import backend.synth_app.schema as schema_import
+import synth_app.schema as schema_import
 
 
 class Query(schema_import.Query, graphene.ObjectType):

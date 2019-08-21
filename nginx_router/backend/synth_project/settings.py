@@ -39,6 +39,7 @@ APPEND_SLASH = True
 # Application definition
 
 INSTALLED_APPS = [
+    'graphene_django',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -48,6 +49,10 @@ INSTALLED_APPS = [
     # custom apps like our synth_app api
     'synth_app'
 ]
+
+GRAPHENE = {
+    'SCHEMA': 'synth_project.schema.schema'
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
