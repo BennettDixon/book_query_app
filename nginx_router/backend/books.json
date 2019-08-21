@@ -1,0 +1,34 @@
+[
+  {
+    "model": "synth_app.author",
+    "pk": 1,
+    "fields": {
+      "name": "Michael B. Jordan"
+    }
+  },
+  {
+    "model": "synth_app.author",
+    "pk": 2,
+    "fields": {
+      "name": "Sylvester Stallone"
+    }
+  },
+  {
+    "model": "synth_app.book",
+    "pk": 1,
+    "fields": {
+      "title": "Creed",
+      "author": "1",
+      "year": "2015"
+    }
+  },
+  {
+    "model": "synth_app.book",
+    "pk": 1,
+    "fields": {
+      "title": "Issues With the West",
+      "author": "2",
+      "year": "1954"
+    }
+  }
+]
