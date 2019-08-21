@@ -13,4 +13,4 @@ COPY ./ ./
 RUN rm ./synth_project/settings_prod.py
 
 EXPOSE 5005
-CMD ["python3", "manage.py", "runserver", "0.0.0.0:5005"]
+CMD ["bash", "boot.sh"]

@@ -14,4 +14,4 @@ COPY ./ ./
 RUN mv ./synth_project/settings_prod.py ./synth_project/settings.py
 
 EXPOSE 5005
-CMD ["gunicorn", "--bind", "0.0.0.0:5005", "--workers", "4", "synth_project.wsgi"]
+CMD ["./boot_prod.sh"]
