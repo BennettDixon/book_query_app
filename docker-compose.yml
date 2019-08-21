@@ -15,6 +15,7 @@ services:
     image: "postgres:latest"
     volumes:
       - ./postgres_data:/var/lib/postgresql/data
+      - ./postgres_conf:/app
   frontend:
     build:
       dockerfile: Dockerfile.dev

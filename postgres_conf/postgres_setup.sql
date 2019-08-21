@@ -1,7 +1,5 @@
-# create a user
-CREATE USER sample_user WITH PASSWORD 'sample_password';
-# create a database and give the user ownership
-CREATE DATABASE sample_database WITH OWNER sample_user;
+CREATE USER postgres_user WITH PASSWORD 'postgres_password';
+CREATE DATABASE book_storage WITH OWNER postgres_user;
 ALTER ROLE postgres_user SET client_encoding TO 'utf8';
 ALTER ROLE postgres_user SET default_transaction_isolation TO 'read committed';
 ALTER ROLE postgres_user SET timezone TO 'UTC';
