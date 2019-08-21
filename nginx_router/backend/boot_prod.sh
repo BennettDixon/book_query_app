@@ -19,4 +19,7 @@ until postgres_ready; do
   sleep 1
 done
 
+python manage.py makemigrations
+python manage.py migrate
+
 gunicorn --bind 0.0.0.0:5005 --workers 4 synth_project.wsgi

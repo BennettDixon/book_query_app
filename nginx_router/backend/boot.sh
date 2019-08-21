@@ -19,4 +19,9 @@ until postgres_ready; do
   sleep 1
 done
 
+python manage.py makemigrations
+python manage.py migrate
+
+python manage.py loaddata books.json
+
 python manage.py runserver 0.0.0.0:5005
