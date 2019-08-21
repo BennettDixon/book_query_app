@@ -33,6 +33,25 @@ git clone https://github.com/BennettDixon/book_query_app
 Run the container network, this will build them the first time so be patient while images are downloaded and containers are built
 
 ```
+docker-compose up -d
+```
+
+Locate the postgres container id using
+
+```
+docker ps
+```
+
+Execute the following, substituting your postgres container id. This will setup a user and database in your postgres container.
+
+```
+docker exec -it <container-id> psql -U postgres -f /app/postgres_setup.sql
+```
+
+Restart the network of containers using the following to apply the migration to the new database:
+
+```
+docker-compose down
 docker-compose up
 ```
 
