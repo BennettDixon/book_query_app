@@ -47,12 +47,6 @@ Execute the following, substituting your postgres container id. This will setup 
 docker exec -it <container-id> psql -U postgres -f /app/postgres_setup.sql
 ```
 
-Restart the network of containers using the following to apply the migration to the new database:
-
-```
-docker-compose restart
-```
-
 Visit the GraphQL endpoint `localhost:8800/graphql` and play with GraphQL Queries!
 
 Feel free to add objects to the `/nginx_router/backend/books.json` file for further testing! They will be loaded in each time you boot the containers.
